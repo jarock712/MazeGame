@@ -16,7 +16,7 @@ public class Mushroom extends MazeObject {
 	
 	public Mushroom(int x, int y, int width, int height){
 		super(x, y, width, height);
-		speed = 5;
+		speed = 2;
 		if (needImage) {
 		    loadImage ("mushroom.png");
 		}
@@ -53,24 +53,36 @@ public class Mushroom extends MazeObject {
 	    }
 	}
 	public void update() {
-		if (up && y > 50) {
+		if (image2.getRGB(x, y-7) == Color.black.getRGB()) {
+			up = false;
+		}
+		else if (up && y > 25 && image2.getRGB(x, y-7) != Color.black.getRGB()) {
 			up();
 		}
-		if (down && y < 925) {
+		if (image2.getRGB(x, y+25) == Color.black.getRGB()) {
+			down = false;
+		}
+		else if (down && y < 925 && image2.getRGB(x, y+25) != Color.black.getRGB()) {
 			down();
 		}
-		if (left && x > 25) {
+		if (image2.getRGB(x-3, y) == Color.black.getRGB()) {
+			left = false;
+		}
+		else if (left && x > 25 && image2.getRGB(x-3, y) != Color.black.getRGB()) {
 			left();
 		}
-		if (right && x < 950) {
+		if (image2.getRGB(x+30, y) == Color.black.getRGB()) {
+			right = false;
+		}
+		else if (right && x < 950 && image2.getRGB(x+30, y) != Color.black.getRGB()) {
 			right();
 		}
 		super.update();
-		if (image2.getRGB(x+5, y+5) == Color.BLACK.getRGB()) {
-			MazePanel.moves = false;
-		}else {
-			MazePanel.moves = true;
-		}
+		//if (image2.getRGB(x+5, y+5) == Color.BLACK.getRGB()) {
+			//MazePanel.moves = false;
+		//}else {
+			//MazePanel.moves = true;
+		//}
 	}
 	public void isActive(boolean b) {
 		// TODO Auto-generated method stub

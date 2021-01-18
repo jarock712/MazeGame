@@ -17,17 +17,18 @@ public class MazePanel extends JPanel implements ActionListener, KeyListener, Mo
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
-	final int MENU = 0;
-    final int GAME = 1;
-    final int END = 2;
+	final static int MENU = 0;
+    final static int GAME = 1;
+    final static int END = 2;
     static final int BLACK = 0;
-    int currentState = MENU;
+    public static int currentState = MENU;
     Font titleFont = new Font("Times New Roman", Font.BOLD, 48);
     Font titleFont2 = new Font("Times New Roman", Font.BOLD, 24);
     Font font1 = new Font("Quicksand", Font.BOLD, 24);
     Timer frameDraw;
     Mushroom mush = new Mushroom(35, 410, 25, 25);
-    MushroomManager manager = new MushroomManager(mush);
+    Star end = new Star(485, 70, 35, 35);
+    MushroomManager manager = new MushroomManager(mush, end);
     public MazePanel() {
     	if (needImage) {
 		    loadImage ("maze.png");
@@ -116,21 +117,33 @@ public class MazePanel extends JPanel implements ActionListener, KeyListener, Mo
 		    }
 		}
 		if (moves == true && e.getKeyCode()==KeyEvent.VK_UP){
-			mush.up();
+			mush.up = true;
 		}
 		if (moves == true && e.getKeyCode()==KeyEvent.VK_DOWN){
-		    mush.down();
+		    mush.down = true;
 		}
 		if (moves == true && e.getKeyCode()==KeyEvent.VK_LEFT){
-		    mush.left();
+		    mush.left = true;
 		}
 		if (moves == true && e.getKeyCode()==KeyEvent.VK_RIGHT){
-		    mush.right();
+		    mush.right = true;
 		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		if (moves == true && e.getKeyCode()==KeyEvent.VK_UP){
+			mush.up = false;
+		}
+		if (moves == true && e.getKeyCode()==KeyEvent.VK_DOWN){
+		    mush.down = false;
+		}
+		if (moves == true && e.getKeyCode()==KeyEvent.VK_LEFT){
+		    mush.left = false;
+		}
+		if (moves == true && e.getKeyCode()==KeyEvent.VK_RIGHT){
+		    mush.right = false;
+		}
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
